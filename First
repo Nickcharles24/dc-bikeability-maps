@@ -16,6 +16,7 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         var map = L.map('map').setView([38.9577, -77.1003], 12); // Centered on Capital Crescent Trail
+        console.log("Map initialized");
 
         // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -23,7 +24,7 @@
         }).addTo(map);
 
         // Add Capital Crescent Trail bike lane (polyline)
-        var capitalCrescentTrail = L.polyline([
+        var capitalCrescentTrailCoords = [
             [38.9036, -77.0650], // Georgetown
             [38.9099, -77.0781],
             [38.9182, -77.0945],
@@ -36,12 +37,20 @@
             [38.9734, -77.1484], // Bethesda
             [38.9776, -77.1537],
             [38.9805, -77.1577]
-        ], {color: 'darkblue', weight: 5, opacity: 0.8}).addTo(map)
-        .bindPopup('Capital Crescent Trail');
+        ];
 
-        // Make the trail clickable to show popup
+        var capitalCrescentTrail = L.polyline(capitalCrescentTrailCoords, {
+            color: 'darkblue', 
+            weight: 5, 
+            opacity: 0.8
+        }).addTo(map).bindPopup('Capital Crescent Trail');
+
+        console.log("Capital Crescent Trail added:", capitalCrescentTrail);
+
+        // Ensure the trail is clickable and shows a popup
         capitalCrescentTrail.on('click', function(e) {
-            capitalCrescentTrail.bindPopup('Capital Crescent Trail').openPopup();
+            this.openPopup();
+            console.log("Trail clicked at: ", e.latlng);
         });
 
         // Add a sample problem area marker
@@ -50,4 +59,3 @@
     </script>
 </body>
 </html>
-
