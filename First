@@ -36,8 +36,13 @@
             [38.9734, -77.1484], // Bethesda
             [38.9776, -77.1537],
             [38.9805, -77.1577]
-        ], {color: 'green', weight: 4}).addTo(map)
+        ], {color: 'darkblue', weight: 5, opacity: 0.8}).addTo(map)
         .bindPopup('Capital Crescent Trail');
+
+        // Make the trail clickable to show popup
+        capitalCrescentTrail.on('click', function(e) {
+            capitalCrescentTrail.bindPopup('Capital Crescent Trail').openPopup();
+        });
 
         // Add a sample problem area marker
         L.marker([38.910, -77.030]).addTo(map)
