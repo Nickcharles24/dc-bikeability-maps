@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DC Bikeability Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 600px; width: 100%; }
+    </style>
+</head>
+<body>
+    <h1>Interactive Bikeability Map of D.C.</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([38.9072, -77.0369], 13); // Center on DC
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add a sample bike lane (polyline)
+        var bikeLane = L.polyline([
+            [38.902, -77.045], 
+            [38.905, -77.040], 
+            [38.908, -77.035]
+        ], {color: 'blue'}).addTo(map)
+        .bindPopup('Example Bike Lane');
+
+        // Add a sample problem area marker
+        L.marker([38.910, -77.030]).addTo(map)
+            .bindPopup('High-traffic intersection, cyclists report safety concerns');
+    </script>
+</body>
+</html>
